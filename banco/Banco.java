@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 
+import exception.ContaInexistenteException;
+
 public class Banco {
     private String nome;
     public String getNome() {
@@ -23,13 +25,13 @@ public class Banco {
             return true;
     }
 
-    public Conta procurarConta(int numeroDaConta) {
+    public Conta procurarConta(int numeroDaConta) throws ContaInexistenteException{
         for(Conta c: contas) {
             if(numeroDaConta == c.getNumero()) {
                 return c;
             }
         }
-        return null;
+        throw new ContaInexistenteException();
     }
 
     public void mostrarDados() {

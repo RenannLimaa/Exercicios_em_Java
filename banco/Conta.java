@@ -1,4 +1,4 @@
-
+import exception.SaldoInsuficienteException;
 
 public class Conta {
     private String titular;
@@ -12,9 +12,9 @@ public class Conta {
         this.saldo = saldo;
     }
     
-    public boolean sacar(double valor) {
+    public boolean sacar(double valor) throws SaldoInsuficienteException{
         if(valor > saldo) 
-            return false;
+            throw new SaldoInsuficienteException();
         else {
             saldo -= valor;
             return true;
@@ -25,14 +25,14 @@ public class Conta {
         saldo += valor;
     }
 
-    public boolean transferirParaConta(Conta c, double valor) {
+    public boolean transferirParaConta(Conta c, double valor) throws SaldoInsuficienteException{
         if(sacar(valor)) {
             c.depositar(valor);
             return true;
         }
 
         else    
-            return false;
+            throw new SaldoInsuficienteException();
     }
 
     public String getTitular() {
